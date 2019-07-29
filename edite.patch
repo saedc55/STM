@@ -1,0 +1,16 @@
+Index: app/src/main/java/saedc/example/com/View/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/saedc/example/com/View/MainActivity.java	(revision af5dc0f3724fa05c30c02fbaf616cb77630ef80b)
++++ app/src/main/java/saedc/example/com/View/MainActivity.java	(date 1527996758792)
+@@ -137,7 +137,7 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         registry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+-System.out.print("fc");
++
+ //        setTheme(R.style.settingTheme1);
+         setContentView(R.layout.activity_main);
+         ButterKnife.bind(this);

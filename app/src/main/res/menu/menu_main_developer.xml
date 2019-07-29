@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".About.AboutActivity">
+
+    <item
+        android:id="@+id/devclick"
+        android:icon="@drawable/a_today"
+        android:title="@string/developers"
+        app:showAsAction="never" />
+
+
+</menu>

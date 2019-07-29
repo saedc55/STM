@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="saedc.example.com">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:name=".StmApp"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".View.Profile.Profile">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".View.Summary.MainSummaryActivity"
+            android:label="@string/title_activity_main_summary"
+            android:parentActivityName=".View.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="saedc.example.com.View.MainActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
+
+        <activity
+            android:name=".Splash.Splash_screen"
+            android:theme="@style/splashTheme">
+
+
+        </activity>
+        <activity android:name=".View.Summary.DetailSummary" />
+        <activity android:name=".View.MainActivity" />
+        <activity android:name=".View.OCR_Scan_Receipt.OcrCaptureActivity" />
+        <activity
+            android:name=".View.ChartList.chartlist"
+            android:label="@string/title_activity_chartlist" />
+        <activity
+            android:name=".Alarm.AlarmActivity"
+            android:label="@string/title_activity_chartlist"
+            android:parentActivityName=".View.MainActivity"
+            android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".View.MainActivity" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name=".Alarm.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".View.SavingActivity"
+            android:parentActivityName=".View.MainActivity" />
+        <activity
+            android:name=".LoginPage.Login"
+            android:theme="@style/loginTheme" />
+        <activity android:name=".TaxCalculator.Taxcalculator" />
+        <activity android:name=".About.AboutActivity" />
+        <activity android:name=".About.DevelopersActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="الضبط"
+            android:parentActivityName=".View.MainActivity"
+            android:theme="@style/settingTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="saedc.example.com.View.MainActivity" />
+        </activity>
+        <activity android:name=".View.ChartList.DetilaChart" />
+        <activity android:name=".View.Summary.SummaryActivity" />
+    </application>
+
+</manifest>

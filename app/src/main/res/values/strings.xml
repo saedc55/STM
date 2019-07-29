@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">aknaz</string>
+    <string name="permission_camera_rationale">Please give camera permission</string>
+    <string name="ok">OK</string>
+    <string name="low_storage_error">Low Storage!</string>
+    <string name="no_camera_permission">There is no camera permission</string>
+    <string name="tap_on_quantity">Tap on the quantity to capture.</string>
+    <string name="scan_receipt">Scan Receipt</string>
+    <string name="save">Save</string>
+    <string name="add_a_spending">Add a Spending</string>
+    <string name="description">Description</string>
+    <string name="delete">delete</string>
+    <string name="edit_a_spending">Edit a Spending</string>
+    <string name="edit_a_saving">Edit a Saving</string>
+    <string name="turkish_lira_symbol">SR</string>
+    <string name="add_a_saving">Add a saving</string>
+
+    <string-array name="groups">
+        <item>Please Select Group</item>
+        <item>Food</item>
+        <item> Bills </item>
+        <item> Occasions </item>
+        <item> Premium </item>
+        <item>kids</item>
+        <item>travel</item>
+        <item> Transportation </item>
+        <item> Other </item>
+        <item>Shopping</item>
+        <item> debt </item>
+        <item> healthcare </item>
+        <item> Fixes </item>
+
+    </string-array>
+    <string-array name="month">
+        <item>يناير</item>
+        <item>فبراير</item>
+        <item>مارس</item>
+        <item>أبريل</item>
+        <item>مايو</item>
+        <item>يونيو</item>
+        <item>يوليو</item>
+        <item>أغسطس</item>
+        <item>سبتمبر</item>
+        <item>أكتوبر</item>
+        <item>نوفمبر</item>
+        <item>ديسمبر</item>
+    </string-array>
+
+    <string name="title_activity_chartlist">Chartlist</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty">no data</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+
+
+    <!-- Example settings for Data & Sync -->
+
+
+    <!-- Example settings for Notifications -->
+
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="sett_reminder_header">Set Reminder</string>
+    <string name="sett_reminder_label">Remind Me</string>
+    <string name="sett_reminder_desc">We will remind you to make entiries of your expense</string>
+    <string name="sett_reminder_time_label">Set Reminder Time</string>
+    <string name="sett_reminder_time_content">8 : 00 PM</string>
+    <string name="notifications_title">remember to record your Spendings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="remind_me">Remind Me</string>
+    <string name="saving_name">Name</string>
+    <string name="saving_price">Price</string>
+    <string name="saving_price_amount">saving</string>
+    <string name="username">USERNAME</string>
+    <string name="salary">SALARY</string>
+    <string name="loginbutton">CREATE</string>
+    <string name="trackmonay">Tracking money is the first way to save it.</string>
+    <string name="Addspin">Addition</string>
+    <string name="chart">Chart</string>
+    <string name="savings">Savings</string>
+    <string name="menu">menu</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="rate">Rate</string>
+    <string name="if_you_like_the_app_please_do_rate_it">If you like the app, please do rate it.</string>
+    <string name="developers">Developers</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="dialog_choicelist">
+        <item>مصروف</item>
+        <item>إيراد</item>
+    </string-array>
+    <string name="title_activity_main_summary">MainSummaryActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

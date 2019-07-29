@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00897B</color>
+    <color name="colorPrimaryLight">#52c7b8</color>
+    <color name="colorAccent">#00BFA5</color>
+    <color name="colorAccentDark">#008E76</color>
+    <color name="colorAccentLight">#5DF2D6</color>
+    <color name="backg">#04adbf</color>
+    <color name="centertext">#000000</color>
+
+
+    <color name="a">#32ffffff</color>
+    <color name="c">#FFC107</color>
+    <color name="d">#FF9800</color>
+    <color name="e">#FF5722</color>
+    <color name="e1">#BEFF5722</color>
+
+
+    <color name="textcolorHeader">#069ecf</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorSecondary">#a5a5a5</color>
+
+    <!--switch color-->
+
+    <color name="thumb_active">#069ecf</color>
+    <color name="track_active">#66069ECF</color>
+
+    <color name="thumb_inactive">#a5a5a5</color>
+    <color name="track_inactive">#66A5A5A5</color>
+    <color name="fillColor">#000000</color>
+    <color name="secondrytext">#55000000</color>
+    <color name="main_text">#e1ffffff</color>
+
+</resources>

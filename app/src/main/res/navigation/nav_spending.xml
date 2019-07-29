@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_spending"
+    app:startDestination="@id/spendingListFragment2">
+
+    <fragment
+        android:id="@+id/spendingListFragment2"
+        android:name="saedc.example.com.View.SpendingList.SpendingListFragment"
+        android:label="fragment_spending_list"
+        tools:layout="@layout/fragment_spending_list" >
+        <action
+            android:id="@+id/action_spendingListFragment2_to_addAndEditSpendingFragment2"
+            app:destination="@id/addAndEditSpendingFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAndEditSpendingFragment2"
+        android:name="saedc.example.com.View.AddAndEditSpending.AddAndEditSpendingFragment"
+        android:label="fragment_add_and_edit_spending"
+        tools:layout="@layout/fragment_add_and_edit_spending" />
+</navigation>

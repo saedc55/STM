@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/spendingListFragment">
+
+    <fragment
+        android:id="@+id/savingListFragment"
+        android:name="saedc.example.com.View.SavingList.SavingListFragment"
+        android:label="fragment_saving_list"
+        tools:layout="@layout/fragment_saving_list" >
+        <action
+            android:id="@+id/action_savingListFragment_to_addAndEditSavingFragment"
+            app:destination="@id/addAndEditSavingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAndEditSavingFragment"
+        android:name="saedc.example.com.View.AddAndEditSaving.AddAndEditSavingFragment"
+        android:label="fragment_add_and_edit_savings"
+        tools:layout="@layout/fragment_add_and_edit_savings" />
+    <fragment
+        android:id="@+id/addAndEditSpendingFragment"
+        android:name="saedc.example.com.View.AddAndEditSpending.AddAndEditSpendingFragment"
+        android:label="fragment_add_and_edit_spending"
+        tools:layout="@layout/fragment_add_and_edit_spending" />
+    <fragment
+        android:id="@+id/spendingListFragment"
+        android:name="saedc.example.com.View.SpendingList.SpendingListFragment"
+        android:label="fragment_spending_list"
+        tools:layout="@layout/fragment_spending_list" >
+        <action
+            android:id="@+id/tospendingedit"
+            app:destination="@id/addAndEditSpendingFragment" />
+    </fragment>
+</navigation>

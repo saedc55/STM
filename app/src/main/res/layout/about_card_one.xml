@@ -1,0 +1,128 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="72.0dip"
+            android:orientation="horizontal"
+            android:padding="16.0dip">
+
+            <ImageView
+                android:layout_width="45.0dip"
+                android:layout_height="45.0dip"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_stm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16.0dip"
+            android:paddingTop="7dp"
+            android:paddingRight="16.0dip">
+
+            <ImageView
+                android:id="@+id/icon_info"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:src="@drawable/information_outline" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32.0dip"
+                android:layout_marginRight="32.0dip"
+                android:orientation="vertical"
+                android:paddingTop="8.0dip"
+                android:paddingBottom="8.0dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/version"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                <TextView
+                    android:id="@+id/app_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip">
+
+            <ImageView
+                android:id="@+id/icon_info78"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:src="@drawable/star" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32.0dip"
+                android:layout_marginRight="32.0dip"
+                android:orientation="vertical"
+                android:paddingTop="8.0dip"
+                android:paddingBottom="8.0dip">
+
+                <TextView
+                    android:id="@+id/ratetit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rate"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                <TextView
+                    android:id="@+id/ratedes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/if_you_like_the_app_please_do_rate_it"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

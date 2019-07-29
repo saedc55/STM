@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/spending_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="2dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEmptyState"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/empty_state"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/TextViewEmptyState"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/cairo"
+        android:text="حاليا لا يوجد اي مصاريف , يمكنك اضافة مصاريفك من خلال الضغط على زر الاضافة اعلى الصفحة"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewEmptyState"
+        app:layout_constraintVertical_bias="0.106" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/floatingActionButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:clickable="true"-->
+    <!--app:layout_anchor="@id/spending_recyclerview"-->
+    <!--app:layout_anchorGravity="bottom|right|end"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/spending_recyclerview"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/spending_recyclerview"-->
+    <!--app:srcCompat="@drawable/fab_add" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

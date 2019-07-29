@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:clipToPadding="false"
+    android:gravity="center"
+    tools:layout_editor_absoluteY="15dp">
+
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="الايرادات"
+        android:textAlignment="center"
+        android:textColor="@color/alert_default_icon_color"
+        app:layout_constraintEnd_toEndOf="@+id/totalincome"
+        app:layout_constraintStart_toStartOf="@+id/totalincome"
+        app:layout_constraintTop_toBottomOf="@+id/totalincome" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="المصاريف"
+        android:textAlignment="center"
+        android:textColor="@color/alert_default_icon_color"
+        app:layout_constraintEnd_toEndOf="@+id/spindingsalary"
+        app:layout_constraintStart_toStartOf="@+id/spindingsalary"
+        app:layout_constraintTop_toBottomOf="@+id/spindingsalary" />
+
+    <TextView
+        android:id="@+id/salaryid"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autoText="true"
+        android:background="@drawable/money_background"
+        android:fontFamily="@font/cairo_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="@stringالراتب"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toStartOf="@+id/spindingsalary"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/spindingsalary"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:autoText="true"
+        android:background="@drawable/money_background"
+        android:fontFamily="@font/cairo_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="المصاريف"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/salaryid"
+        app:layout_constraintEnd_toStartOf="@+id/totalincome"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/salaryid"
+        app:layout_constraintTop_toTopOf="@+id/salaryid" />
+
+    <TextView
+        android:id="@+id/totalincome"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/money_background"
+        android:fontFamily="@font/cairo_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="المتبقي"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/spindingsalary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/spindingsalary"
+        app:layout_constraintTop_toTopOf="@+id/spindingsalary" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="الدخل"
+        android:textAlignment="center"
+        android:textColor="@color/alert_default_icon_color"
+        app:layout_constraintEnd_toEndOf="@+id/salaryid"
+        app:layout_constraintStart_toStartOf="@+id/salaryid"
+        app:layout_constraintTop_toBottomOf="@+id/salaryid" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<View-->
+    <!--android:id="@+id/view2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:background="#fff" />-->
+
+

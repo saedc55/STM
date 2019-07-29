@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+            android:id="@+id/price2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:layout_weight="1"
+            android:autoText="true"
+            android:fontFamily="@font/cairo_light"
+            android:gravity="center"
+            android:textAlignment="viewStart"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/price1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+
+            android:layout_weight="1"
+            android:autoText="true"
+            android:ellipsize="end"
+            android:fontFamily="@font/cairo_light"
+            android:gravity="left|right|center"
+            android:singleLine="true"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform" />
+
+
+        <com.daimajia.numberprogressbar.NumberProgressBar
+            android:id="@+id/progressBar3"
+            style="@style/NumberProgressBar_Twinkle_Night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:progress_reached_bar_height="3dp"
+            app:progress_text_size="18sp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

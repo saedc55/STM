@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">اكنز</string>
+    <string name="permission_camera_rationale">يجب السماح لإستخدام الكاميرا</string>
+    <string name="ok">موافق</string>
+    <string name="low_storage_error">مساحةالتخزين لا تكفي</string>
+    <string name="no_camera_permission">لم يتم السماح للتطبيق  بإستخدام الكاميرا</string>
+    <string name="tap_on_quantity">حدد السعر المطلوب</string>
+    <string name="scan_receipt">مسح الإيصال</string>
+    <string name="save">حفظ</string>
+    <string name="add_a_spending">إضافة مشتريات جديدة</string>
+    <string name="description">الوصف</string>
+    <string name="delete">حذف</string>
+    <string name="edit_a_spending">التعديل على المشتريات</string>
+    <string name="edit_a_saving">التعديل على الاهداف</string>
+    <string name="turkish_lira_symbol">ريال</string>
+    <string name="action_settings">الضبط</string>
+
+    <string-array name="groups">
+        <item>الرجاء إختيار النوع</item>
+        <item>طعام</item>
+        <item>فواتير</item>
+        <item>مناسبات</item>
+        <item>اقساط</item>
+        <item>الأطفال</item>
+        <item>سفر</item>
+        <item>مواصلات</item>
+        <item>اخرى</item>
+        <item>تسوق</item>
+        <item>ديون</item>
+        <item>العناية الصحية</item>
+        <item>الإصلاحات</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>يناير</item>
+        <item>فبراير</item>
+        <item>مارس</item>
+        <item>أبريل</item>
+        <item>مايو</item>
+        <item>يونيو</item>
+        <item>يوليو</item>
+        <item>أغسطس</item>
+        <item>سبتمبر</item>
+        <item>أكتوبر</item>
+        <item>نوفمبر</item>
+        <item>ديسمبر</item>
+    </string-array>
+
+
+    <string-array name="dialog_choicelist">
+        <item>مصروف</item>
+        <item>إيراد</item>
+    </string-array>
+
+    <string name="sett_reminder_header">تعيين تذكير</string>
+    <string name="sett_reminder_label">ذكرني</string>
+    <string name="sett_reminder_desc">سوف نذكرك لكي تقوم بتسجيل مصاريفك</string>
+    <string name="sett_reminder_time_label">عين وقت التذكير</string>
+    <string name="sett_reminder_time_content">8 : 00 PM</string>
+    <string name="notifications_title">لاتنسى تسجيل المصاريف اليومية</string>
+    <string name="remind_me">تعيين وقت التذكير</string>
+    <string name="saving_name">الإسم</string>
+    <string name="saving_price">السعر</string>
+    <string name="saving_price_amount">المدخر</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="salary">الراتب</string>
+    <string name="loginbutton">إنشاء</string>
+    <string name="trackmonay">تتبع المال هو الخطوة الاولى لحفظه .</string>
+    <string name="Addspin">إضافة</string>
+    <string name="chart">رسم بياني</string>
+    <string name="savings">مُدخرات</string>
+    <string name="menu">القائمة</string>
+    <string name="about">حول</string>
+    <string name="version">1.0</string>
+    <string name="rate">تقييم</string>
+    <string name="if_you_like_the_app_please_do_rate_it">من فضلك في حال أعجبك التطبيق لاتنسى التقييم.</string>
+    <string name="developers">المطورين</string>
+    <string name="empty">لايوجد</string>
+    <string name="add_a_saving">إضافة مدخر</string>
+</resources>

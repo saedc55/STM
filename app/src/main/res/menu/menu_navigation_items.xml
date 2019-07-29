@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/spending"
+        android:icon="@drawable/asset_spending"
+        android:title="مصاريف" />
+    <item
+        android:id="@+id/saving"
+        android:icon="@drawable/asset_saving"
+        android:title="مدخرات" />
+
+    <!--<item android:id="@+id/gool"-->
+    <!--android:title="اهداف"-->
+    <!--android:icon="@drawable/favorite_" />-->
+</menu>

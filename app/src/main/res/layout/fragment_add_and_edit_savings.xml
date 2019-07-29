@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textInputLayou"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="35dp"
+            android:text="@string/add_a_saving"
+            android:textSize="25sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayou"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/group_spinner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="16dp">
+
+                    <EditText
+                        android:id="@+id/name_saving"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/saving_name" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textInputLayou"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="16dp">
+
+                    <EditText
+                        android:id="@+id/saving_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/saving_price"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textInputLayout"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="16dp">
+
+                    <EditText
+                        android:id="@+id/saving_price_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/saving_price_amount"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textInputLayout2"
+                    android:layout_alignTop="@+id/textView7"
+                    android:layout_weight="1"
+                    android:textSize="14sp" />
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textInputLayout"
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/delete_button1"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/textInputLayout2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/button_bordered"
+                    android:contentDescription="@string/delete"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/icon_delete" />
+
+
+                <ImageButton
+                    android:id="@+id/save_button1"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/textInputLayout2"
+                    android:layout_alignEnd="@+id/textInputLayout2"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/button_bordered_save"
+                    android:contentDescription="@string/scan_receipt"
+                    android:textColor="@color/colorAccent"
+                    app:srcCompat="@drawable/icon_save" />
+
+                <ImageButton
+                    android:id="@+id/CalendarButton"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_alignStart="@+id/textInputLayout2"
+                    android:layout_alignTop="@+id/delete_button1"
+                    android:background="@drawable/button_bordered"
+                    app:srcCompat="@drawable/a_today" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/delete_button1"
+                    android:layout_marginStart="26dp"
+                    android:layout_toEndOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textInputLayou"
+                    android:layout_centerHorizontal="true"
+                    android:text=""
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
