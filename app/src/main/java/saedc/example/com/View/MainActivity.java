@@ -49,6 +49,7 @@ import saedc.example.com.TaxCalculator.Taxcalculator;
 import saedc.example.com.View.AddAndEditSaving.AddAndEditSavingFragment;
 import saedc.example.com.View.AddAndEditSpending.AddAndEditSpendingFragment;
 import saedc.example.com.View.ChartList.chartlist;
+import saedc.example.com.View.Profile.Profile;
 import saedc.example.com.View.SavingList.SavingListFragment;
 import saedc.example.com.View.SpendingList.SpendingListFragment;
 import saedc.example.com.View.SpendingList.SpendingListViewModel;
@@ -391,6 +392,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.currncy) {
             Intent intent = new Intent(this, Taxcalculator.class);
             startActivity(intent);
@@ -402,6 +404,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             startActivity(intent);
         } else if (id == R.id.summray) {
             Intent intent = new Intent(this, MainSummaryActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.salaryProfile) {
+            Intent intent = new Intent(this, Profile.class);
             startActivity(intent);
         }
 

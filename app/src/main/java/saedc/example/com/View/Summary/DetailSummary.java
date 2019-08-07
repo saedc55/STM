@@ -43,7 +43,7 @@ public class DetailSummary extends AppCompatActivity {
     TextView most;
     @BindView(R.id.mostcategory)
     TextView mostcategory;
-    @BindView(R.id.chart)
+    @BindView(R.id.chartSummary)
     PieChart pieChart;
 
 

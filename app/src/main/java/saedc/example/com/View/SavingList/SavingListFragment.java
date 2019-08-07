@@ -5,9 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import saedc.example.com.Model.Entity.Saving;
@@ -35,7 +38,10 @@ public class SavingListFragment extends Fragment implements Recyclerviewclick {
 
     @BindView(R.id.saving_recyclerview)
     RecyclerView savingRecyclerView;
-
+    @BindView(R.id.imageViewEmptyState)
+    ImageView imageViewEmptyState;
+    @BindView(R.id.TextViewEmptyState)
+    TextView TextViewEmptyState;
 
 
     public static SavingListFragment newInstance() {
@@ -47,7 +53,6 @@ public class SavingListFragment extends Fragment implements Recyclerviewclick {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
     }
@@ -85,6 +90,7 @@ public class SavingListFragment extends Fragment implements Recyclerviewclick {
             @Override
             public void onChanged(final List<Saving> savingss) {
                 adapter.updateItems(savingss);
+                onEmptytate(savingss);
             }
         });
     }
@@ -116,6 +122,20 @@ public class SavingListFragment extends Fragment implements Recyclerviewclick {
                     }
                 })
                 .show();
+
+    }
+
+
+    private void onEmptytate(List<Saving> dataset) {
+        if (dataset.isEmpty()) {
+            savingRecyclerView.setVisibility(View.GONE);
+            imageViewEmptyState.setVisibility(View.VISIBLE);
+            TextViewEmptyState.setVisibility(View.VISIBLE);
+        } else {
+            savingRecyclerView.setVisibility(View.VISIBLE);
+            imageViewEmptyState.setVisibility(View.GONE);
+            TextViewEmptyState.setVisibility(View.GONE);
+        }
 
     }
 

@@ -10,7 +10,7 @@
 
 
     <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart"
+        android:id="@+id/chartSummary"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="8dp"
@@ -31,26 +31,19 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart">
+        app:layout_constraintTop_toBottomOf="@+id/chartSummary">
 
-        <include layout="@layout/month_list"></include>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclview_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
     </ScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclview_summary"
-        android:layout_width="395dp"
-        android:layout_height="457dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

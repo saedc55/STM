@@ -6,22 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -46,33 +40,10 @@ public class SpendingSummary extends Fragment implements SummaryClickListener {
 
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-    @BindView(R.id.chart)
+    @BindView(R.id.chartSummary)
     BarChart chart;
     Unbinder unbinder;
-    @BindView(R.id.button1)
-    Button button1;
-    @BindView(R.id.button2)
-    Button button2;
-    @BindView(R.id.button3)
-    Button button3;
-    @BindView(R.id.button4)
-    Button button4;
-    @BindView(R.id.button5)
-    Button button5;
-    @BindView(R.id.button6)
-    Button button6;
-    @BindView(R.id.button7)
-    Button button7;
-    @BindView(R.id.button8)
-    Button button8;
-    @BindView(R.id.button9)
-    Button button9;
-    @BindView(R.id.button10)
-    Button button10;
-    @BindView(R.id.button11)
-    Button button11;
-    @BindView(R.id.button12)
-    Button button12;
+
     Intent intent;
     Bundle bundle;
     SummaryViewModel viewModel;

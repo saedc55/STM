@@ -8,7 +8,7 @@
     tools:context=".View.Summary.MainSummaryActivity$PlaceholderFragment">
 
     <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart"
+        android:id="@+id/chartSummary"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="8dp"

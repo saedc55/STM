@@ -173,7 +173,7 @@ public class tabchart2 extends Fragment  {
 
                 convertView = LayoutInflater.from(getContext()).inflate(
                         R.layout.list_item_barchart, null);
-                holder.chart = (BarChart) convertView.findViewById(R.id.chart);
+                holder.chart = (BarChart) convertView.findViewById(R.id.chartSummary);
 
                 convertView.setTag(holder);
 

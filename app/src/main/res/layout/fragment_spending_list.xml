@@ -15,6 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="2dp"
+        android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,30 +26,35 @@
         android:id="@+id/imageViewEmptyState"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="8dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/empty_state"
-        tools:visibility="gone" />
+        app:srcCompat="@drawable/empty_state" />
 
     <TextView
         android:id="@+id/TextViewEmptyState"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/cairo"
         android:text="حاليا لا يوجد اي مصاريف , يمكنك اضافة مصاريفك من خلال الضغط على زر الاضافة اعلى الصفحة"
         android:textAlignment="center"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewEmptyState"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.50" />
 
     <!--<android.support.design.widget.FloatingActionButton-->
     <!--android:id="@+id/floatingActionButton"-->

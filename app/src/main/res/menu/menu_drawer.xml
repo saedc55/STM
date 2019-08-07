@@ -21,6 +21,9 @@
             android:id="@+id/summray"
 
             android:title="ملخص" />
+        <item
+            android:id="@+id/salaryProfile"
+            android:title="معلومات الراتب" />
     </group>
 
 </menu>

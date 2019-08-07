@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -9,15 +10,19 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:paddingBottom="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
             android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linear6"
-            app:layout_constraintStart_toStartOf="@+id/linear6"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear6">
 
             <TextView
@@ -69,12 +74,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linear5"
-            app:layout_constraintStart_toStartOf="@+id/linear5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/linear5">
 
             <TextView
@@ -142,11 +150,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linear5"
-            android:layout_width="118dp"
+            android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
@@ -218,10 +229,12 @@
             android:id="@+id/linear6"
             android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <TextView
@@ -276,11 +289,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linear9"
-            android:layout_width="118dp"
+            android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
@@ -350,25 +366,29 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart"
+            android:id="@+id/chartSummary"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginLeft="8dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/button_bordered_detail"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="243dp"
+            android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/guideline">
 
 
             <TextView
@@ -421,12 +441,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="137dp"
+            android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout7"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline">
 
             <TextView
                 android:id="@+id/total"
@@ -478,27 +501,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout7"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button_bordered_detail"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart"></LinearLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="103dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toEndOf="@+id/linear9"
-            app:layout_constraintStart_toStartOf="@+id/linear9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/linear9">
 
             <TextView
@@ -563,6 +574,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="272dp"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.33" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
