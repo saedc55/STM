@@ -22,7 +22,6 @@
         <activity android:name=".View.Profile.Profile">
 
 
-
         </activity>
         <activity
             android:name=".View.Summary.MainSummaryActivity"
@@ -48,7 +47,13 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".View.Summary.DetailSummary" />
+
+        <activity
+            android:name=".View.Summary.DetailSummary"
+            android:label="ملخص"
+            android:parentActivityName=".View.Summary.MainSummaryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".View.MainActivity" />
         <activity android:name=".View.OCR_Scan_Receipt.OcrCaptureActivity" />
         <activity

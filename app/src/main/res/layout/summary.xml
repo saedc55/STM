@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -9,9 +10,33 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:background="#FC009688"
         android:paddingBottom="8dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="@dimen/card_marge"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chartSummary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@drawable/button_bordered_detail2" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
@@ -20,10 +45,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear6">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
                 android:id="@+id/avg_income"
@@ -33,9 +59,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -50,13 +78,13 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:autoText="false"
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
-                android:text="المتوسط"
+                android:text="متوسط"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView37"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/avg_income" />
@@ -71,6 +99,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_bordered_detail"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:text="الايراد"
+                android:textColor="@color/mdtp_white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,10 +126,11 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/linear5">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
                 android:id="@+id/most_income"
@@ -93,9 +140,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/textView29"
@@ -114,6 +163,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="اقل ايراد"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/textView30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,6 +180,7 @@
                 android:autoText="true"
                 android:fontFamily="@font/cairo"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,10 +206,11 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <TextView
                 android:id="@+id/least"
@@ -168,9 +220,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -189,6 +243,7 @@
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -205,6 +260,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="اقل صرف"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/leastcategory"
@@ -232,7 +288,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
@@ -245,9 +302,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -262,14 +321,14 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:autoText="false"
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
-                android:text="المتوسط"
+                android:text="متوسط"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView36"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/avg" />
@@ -285,6 +344,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_bordered_detail"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:text="الصرف"
+                android:textColor="@color/mdtp_white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/jsht" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -294,10 +371,11 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <TextView
                 android:id="@+id/most"
@@ -307,10 +385,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -329,6 +409,7 @@
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -345,6 +426,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="اعلى صرف"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/mostcategory"
@@ -365,78 +447,59 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chartSummary"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button_bordered_detail"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"
             android:layout_width="0dp"
             android:layout_height="103dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/guideline">
-
-
-            <TextView
-                android:id="@+id/jhg"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/cairo"
-                android:gravity="center"
-                android:text="+40%"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear5">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/totalIncome"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
-                android:gravity="center"
-                android:text="لذا استخدمنا خدمة العمال الآليين في دراستنا ثانيةً وجعلنا الحاسوب يختار "
-                android:textAlignment="textStart"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="0.00"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/jhg"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_width="178dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:autoText="false"
                 android:fontFamily="@font/cairo"
-                android:text="بالنسة للشهر الماضي"
+                android:gravity="center"
+                android:text="مجموع الايرادات"
                 android:textAlignment="center"
-                android:textSize="10sp"
+                android:textColor="@color/mdtp_white"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/jhg"
-                app:layout_constraintStart_toStartOf="@+id/jhg" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalIncome" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -445,23 +508,27 @@
             android:layout_height="103dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/button_bordered_detail"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline">
 
             <TextView
-                android:id="@+id/total"
+                android:id="@+id/totalSpending"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -480,13 +547,14 @@
                 android:autoText="false"
                 android:fontFamily="@font/cairo"
                 android:gravity="center"
-                android:text="المجموع"
+                android:text="مجموع الصرف"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total" />
+                app:layout_constraintTop_toBottomOf="@+id/totalSpending" />
 
             <TextView
                 android:id="@+id/textView35"
@@ -498,6 +566,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -507,10 +576,11 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_bordered_detail"
+            android:background="@drawable/button_bordered_detail2"
+            android:elevation="@dimen/card_marge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/linear9">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
                 android:id="@+id/least_income"
@@ -520,9 +590,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:autoText="true"
+                android:background="@drawable/money_background"
                 android:fontFamily="@font/cairo"
                 android:text="0.00"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
@@ -541,6 +613,7 @@
                 android:fontFamily="@font/cairo"
                 android:text="اعلى ايراد"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/textView27"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -557,6 +630,7 @@
                 android:autoText="true"
                 android:fontFamily="@font/cairo"
                 android:textAlignment="center"
+                android:textColor="@color/mdtp_white"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -580,8 +654,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp"
-            app:layout_constraintGuide_percent="0.40" />
+            app:layout_constraintGuide_end="442dp"
+            app:layout_constraintGuide_percent="0.4" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -606,6 +680,27 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp"
             app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/money_background"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

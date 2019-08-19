@@ -1,5 +1,7 @@
 package saedc.example.com.View.AddAndEditSpending;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,11 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,11 +31,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,9 +45,6 @@ import saedc.example.com.View.OCR_Scan_Receipt.OcrCaptureActivity;
 public class AddAndEditSpendingFragment extends Fragment implements View.OnFocusChangeListener {
     private static final int RC_OCR_CAPTURE = 3;
 
-
-    @BindView(R.id.group_spinner)
-    Spinner groupSpinner;
 
     @BindView(R.id.save_button)
     ImageButton saveButton;
@@ -80,10 +81,15 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     boolean check;
     @BindView(R.id.container)
     NestedScrollView container;
+    AlertDialog.Builder categoryDialog;
+    @BindView(R.id.CategoryButton)
+    Button CategoryButton;
+    int groupId;
 
     public static AddAndEditSpendingFragment newInstance() {
         return new AddAndEditSpendingFragment();
     }
+
 
     public static AddAndEditSpendingFragment newInstance(RawSpending spending) {
         Bundle bundle = new Bundle();
@@ -109,7 +115,6 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         ButterKnife.bind(this, view);
         quantityEditText.setOnFocusChangeListener(this);
         descriptionEditText.setOnFocusChangeListener(this);
-
         Bundle bundle = this.getArguments();
 
         if (bundle == null || bundle.isEmpty()) {
@@ -152,7 +157,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     }
 
     public void inComeUi() {
-        groupSpinner.setVisibility(View.GONE);
+        CategoryButton.setVisibility(View.GONE);
         cameraButton.setVisibility(View.GONE);
         textInputLayout3.setVisibility(View.VISIBLE);
     }
@@ -163,20 +168,14 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         viewModel = ViewModelProviders.of(this).get(AddAndEditSpendingViewModel.class);
         SettingDatabase = PreferenceManager.getDefaultSharedPreferences(getActivity());
         subscribeSpendingGroups();
-        if (spendingGroupList != null) {
-            fillSpinner(groupSpinner, spendingGroupList);
-        }
+
     }
 
     private void subscribeSpendingGroups() {
-        viewModel.spendingGroups.observe(this, new Observer<List<SpendingGroup>>() {
-            @Override
-            public void onChanged(@Nullable List<SpendingGroup> spendingGroups) {
-                spendingGroupList = (ArrayList<SpendingGroup>) spendingGroups;
-                fillSpinner(groupSpinner, spendingGroupList);
-                if (spending.getId() != 0) {
-                    setTakenSpendingDataToFormElements();
-                }
+        viewModel.spendingGroups.observe(this, spendingGroups -> {
+            spendingGroupList = (ArrayList<SpendingGroup>) spendingGroups;
+            if (spending.getId() != 0) {
+                setTakenSpendingDataToFormElements();
             }
         });
     }
@@ -187,13 +186,14 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         quantityEditText.setText(String.valueOf(spending.getPrice()));
         descriptionEditText.setText(spending.getDescription());
         source.setText(spending.getSource());
-        groupSpinner.setSelection(spending.getGroupId());
+
 
     }
 
+
     @OnClick(R.id.save_button)
     public void save() {
-        int groupId = groupSpinner.getSelectedItemPosition();
+
         String priceString = quantityEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         String Source = source.getText().toString();
@@ -337,17 +337,18 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         spending.setSource(source);
     }
 
-    public void fillSpinner(Spinner groupSpinner, List<SpendingGroup> spendingGroups) {
+//    public void fillSpinner(Spinner groupSpinner, List<SpendingGroup> spendingGroups) {
+//
+//        ArrayList<String> stringGroups1 = new ArrayList<>();
+//        stringGroups1.add("الرجاء إختيار النوع");
+//        for (SpendingGroup s : spendingGroups) {
+//            stringGroups1.add(s.getGroupName());
+//        }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, stringGroups1);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        groupSpinner.setAdapter(adapter);
+//    }
 
-        ArrayList<String> stringGroups1 = new ArrayList<String>();
-        stringGroups1.add("الرجاء إختيار النوع");
-        for (SpendingGroup s : spendingGroups) {
-            stringGroups1.add(s.getGroupName());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, stringGroups1);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        groupSpinner.setAdapter(adapter);
-    }
 
     @Override
     public void onFocusChange(View view, boolean isFocused) {
@@ -362,4 +363,41 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     }
 
 
+    @OnClick(R.id.CategoryButton)
+    public void onViewClicked() {
+        customDialog(spendingGroupList);
+
+    }
+
+
+    void customDialog(List<SpendingGroup> spendingGroups) {
+        categoryDialog = new AlertDialog.Builder(getActivity());
+
+
+        ArrayList<String> stringGroup = new ArrayList<String>();
+        stringGroup.add("الرجاء إختيار النوع");
+        for (SpendingGroup s : spendingGroups) {
+            stringGroup.add(s.getGroupName());
+        }
+        categoryDialog.setNegativeButton("cancel", (dialog, which) -> {
+
+
+        });
+
+        categoryDialog.setItems(stringGroup.toArray(new String[0]), (dialog, which) -> {
+            CategoryButton.setText(stringGroup.get(which));
+            groupId = which;
+            if (which != 0) {
+                CategoryButton.setBackgroundResource(R.drawable.button_bordered_save);
+                CategoryButton.setTextColor(getResources().getColor(R.color.mdtp_white));
+            } else {
+                CategoryButton.setBackgroundResource(R.drawable.button_bordered);
+                CategoryButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+            }
+
+        });
+
+
+        categoryDialog.create().show();
+    }
 }

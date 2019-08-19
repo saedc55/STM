@@ -96,21 +96,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         SettingsDataBase = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-        checkReminder();
+        if (SettingsDataBase.getBoolean("salaryRemainder", false)) {
+            checkReminder();
+        }
+
 
         viewModel = ViewModelProviders.of(this).get(SpendingListViewModel.class);
 
-//        KeyboardVisibilityEvent.setEventListener(
-//                this,
-//                new KeyboardVisibilityEventListener() {
-//                    @Override
-//                    public void onVisibilityChanged(boolean isOpen) {
-//                        // some code depending on keyboard visiblity status
-//                        if (isOpen) { bottomNavigationView.setVisibility(View.GONE);
-//                        } else bottomNavigationView.setVisibility(View.VISIBLE);
-//
-//                    }
-//                });
+
 
         Boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
         if (IsColoreEnable) {
@@ -123,12 +116,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         fragmentManager = getSupportFragmentManager();
-        Boolean switchPref = SettingsDataBase.getBoolean("example_switch", false);
-        String Disblyname = SettingsDataBase.getString("Settings_name", "hello");
 
-        if (switchPref) {
-//            getSupportActionBar().setTitle(Disblyname);
-        }
+
+
+
         spendingButton.hide();
         savingButton.hide();
         //Add this fragment just at start and dont add to backstack
@@ -137,12 +128,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             spendingButton.show();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -159,11 +150,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (!dateFormat.format(Calendar.getInstance().getTime()).equals(shrd.getString("reminder_date", "...."))) {
 
 
-            AlertDialog alertbox = new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setMessage("هل تريد اضافة الباقي من راتب الشهر الماضي؟")
                     .setPositiveButton("نعم", (arg0, arg1) -> {
-
-
                                 try {
                                     Double totalSpending = viewModel.getLeftOverIncomeForLastMonth() != null ? viewModel.getLeftOverIncomeForLastMonth() : 0.0;
 
@@ -236,27 +225,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         double Percentag = ((ThisMonthTotal * 100.0) / salary);
         Percentag = Math.round(Percentag * 100.0) / 100.0;
 
-        if (Percentag >= 20.0) {
 
-            if (Percentag <= 40.0) {
-                ChangrColore(R.color.colorPrimary, R.color.a);
-            } else if (Percentag <= 60.0) {
-                ChangrColore(R.color.a, R.color.c);
-            } else if (Percentag <= 80.0) {
-                ChangrColore(R.color.c, R.color.d);
-            } else if (Percentag <= 100.0) {
-                ChangrColore(R.color.d, R.color.e);
-            }
+        if (Percentag >= 100.0) {
+            changeColor(R.color.d, R.color.e);
+        } else if (Percentag >= 80.0) {
+            changeColor(R.color.c, R.color.d);
+        } else if (Percentag >= 60.0) {
+            changeColor(R.color.a, R.color.c);
+        } else if (Percentag >= 40.0) {
+            changeColor(R.color.colorPrimary, R.color.a);
         } else {
-            ChangrColore(R.color.colorPrimary, R.color.colorPrimary);
-
+            changeColor(R.color.colorPrimary, R.color.colorPrimary);
         }
 
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void ChangrColore(int colorStart, int colorEnd) {
+    public void changeColor(int colorStart, int colorEnd) {
 
 
         int colorFrom = getResources().getColor(colorStart);
@@ -275,7 +261,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             collaps.setContentScrimColor((int) animator.getAnimatedValue());
             toolbar.setBackgroundColor((int) animator.getAnimatedValue());
             getWindow().setStatusBarColor((int) animator.getAnimatedValue());
-//                totalSpendingPriceFragment.changeTextColor((int) animator.getAnimatedValue());
+            savingButton.setColorFilter((int) animator.getAnimatedValue());
+            spendingButton.setColorFilter((int) animator.getAnimatedValue());
 
         });
         colorAnimation.start();
@@ -316,15 +303,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onBackPressed() {
-        int backStackCount = getFragmentBackStackCount();
-        //if backstack == 1 it means this is last fragment so show fab
-//        switch (backStackCount) {
-//            case 1:
-////                spendingButton.show();
-////                menuButton.showMenu(true);
-//                break;
-//        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
             return;
@@ -339,9 +319,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     public void showFragment(Fragment nextFragment) {
-        //be sure to not load same
         nextFragmentName = nextFragment.getClass().getName();
-//        Toast.makeText(this, nextFragment.getClass().getName(), Toast.LENGTH_SHORT).show();
         savingButton.hide();
         spendingButton.hide();
 
@@ -405,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         } else if (id == R.id.summray) {
             Intent intent = new Intent(this, MainSummaryActivity.class);
             startActivity(intent);
-        }else if (id == R.id.salaryProfile) {
+        } else if (id == R.id.salaryProfile) {
             Intent intent = new Intent(this, Profile.class);
             startActivity(intent);
         }
@@ -413,8 +391,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()) {
             case R.id.spending:
-//                SpendingListFragment spendingListFragment = new SpendingListFragment();
-//                showFragment(spendingListFragment);
+
                 showRootFragment(SpendingListFragment.newInstance());
                 spendingButton.setVisibility(VISIBLE);
                 savingButton.setVisibility(View.GONE);
@@ -422,8 +399,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                 return true;
             case R.id.saving:
-//                SavingListFragment savingListFragment = SavingListFragment.newInstance();
-//                showFragment(savingListFragment);
                 showRootFragment(SavingListFragment.newInstance());
                 spendingButton.setVisibility(View.GONE);
                 savingButton.setVisibility(VISIBLE);

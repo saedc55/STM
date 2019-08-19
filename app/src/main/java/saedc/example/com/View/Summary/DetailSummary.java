@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -33,7 +34,7 @@ public class DetailSummary extends AppCompatActivity {
     SummaryViewModel viewModel;
     @BindView(R.id.avg)
     TextView avg;
-    @BindView(R.id.total)
+    @BindView(R.id.totalSpending)
     TextView total;
     @BindView(R.id.least)
     TextView least;
@@ -50,13 +51,16 @@ public class DetailSummary extends AppCompatActivity {
     int month;
 
 
-
     @BindView(R.id.avg_income)
     TextView avgIncome;
     @BindView(R.id.most_income)
     TextView mostIncome;
     @BindView(R.id.least_income)
     TextView leastIncome;
+    @BindView(R.id.totalIncome)
+    TextView totalIncome;
+    @BindView(R.id.toolbar3)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +70,8 @@ public class DetailSummary extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(SummaryViewModel.class);
 
         month = getIntent().getIntExtra(MainSummaryActivity.MONTH, 1);
-
+setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        ValueAnimator animation = ValueAnimator.ofFloat(1000f, 0f);
 //        animation.setDuration(700);
 //        animation.start();
@@ -94,14 +99,14 @@ public class DetailSummary extends AppCompatActivity {
         });
 
 
-        viewModel.getLeastIncome(month).observe(this,mostAndLeast -> {
+        viewModel.getLeastIncome(month).observe(this, mostAndLeast -> {
 
             leastIncome.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
 
         });
 
 
-        viewModel.getMostIncome(month).observe(this,mostAndLeast -> {
+        viewModel.getMostIncome(month).observe(this, mostAndLeast -> {
 
             mostIncome.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
 
@@ -109,11 +114,13 @@ public class DetailSummary extends AppCompatActivity {
         });
 
         viewModel.getAvgMaxTotalSending(month).observe(this::getLifecycle, avgTotal -> {
-            total.setText(String.valueOf(avgTotal != null ? avgTotal.getTotal() : null));
+            total.setText(String.valueOf(avgTotal != null ? avgTotal.getSpend() : null));
             avg.setText(String.valueOf(avgTotal != null ? avgTotal.getAverage() : null));
+            totalIncome.setText(String.valueOf(avgTotal != null ? avgTotal.getIncome() : null));
+
 
             viewModel.getPichartByMonth(month).observe(this::getLifecycle, piechartPojos ->
-                    showTotalQuantityInUi(avgTotal != null ? avgTotal.getTotal() : null, piechartPojos));
+                    showTotalQuantityInUi(avgTotal != null ? avgTotal.getSpend() : null, piechartPojos));
 
         });
 

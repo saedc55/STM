@@ -11,6 +11,7 @@ import androidx.room.Query;
 import saedc.example.com.Model.Entity.RawSpending;
 import saedc.example.com.Model.Pojo.AvgMaxMin;
 import saedc.example.com.Model.Pojo.AvgTotal;
+import saedc.example.com.Model.Pojo.AvgTotalSpendAndIncome;
 import saedc.example.com.Model.Pojo.IncomeAndSpendPojo;
 import saedc.example.com.Model.Pojo.LastMonth;
 import saedc.example.com.Model.Pojo.LinechartPojo;
@@ -100,8 +101,8 @@ public interface SpendingDao {
     @Query("SELECT AVG(QUANTITY) AS average, MAX(QUANTITY) AS maximum , MIN(QUANTITY) AS minimum FROM SPENDING WHERE isSpend=1 AND datetime(SPENDING.date/1000, 'unixepoch') >= date('now','localtime', '-1 month') AND datetime(SPENDING.date/1000, 'unixepoch') < datetime('now','localtime', 'start of month')")
     LiveData<AvgMaxMin> getAvgMaxMinSending();
 
-    @Query("SELECT AVG(QUANTITY) AS average, SUM(QUANTITY) AS total FROM SPENDING WHERE isSpend=1 AND CAST(strftime('%m', datetime(date/1000, 'unixepoch')) AS int)=:Month")
-    LiveData<AvgTotal> getAvgMaxTotalSending(int Month);
+    @Query("SELECT AVG(QUANTITY) AS AVERAGE, SUM(case when isSpend = 0 then QUANTITY end ) AS INCOME,SUM(case when isSpend = 1 then QUANTITY end ) AS SPEND FROM SPENDING WHERE  CAST(strftime('%m', datetime(date/1000, 'unixepoch')) AS int)=:Month")
+    LiveData<AvgTotalSpendAndIncome> getAvgMaxTotalSending(int Month);
 
     @Query("SELECT MAX(QUANTITY) AS price, group_name  FROM SPENDING,SPENDING_GROUP WHERE isSpend=1 AND SPENDING.GROUP_ID = SPENDING_GROUP.GROUP_ID AND CAST(strftime('%m', datetime(date/1000, 'unixepoch')) AS int)=:Month LIMIT 1 ")
     LiveData<MostAndLeast> getMostSending(int Month);

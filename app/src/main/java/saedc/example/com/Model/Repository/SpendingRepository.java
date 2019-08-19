@@ -19,6 +19,7 @@ import saedc.example.com.Model.Entity.SpendingGroup;
 import saedc.example.com.Model.Entity.User;
 import saedc.example.com.Model.Pojo.AvgMaxMin;
 import saedc.example.com.Model.Pojo.AvgTotal;
+import saedc.example.com.Model.Pojo.AvgTotalSpendAndIncome;
 import saedc.example.com.Model.Pojo.IncomeAndSpendPojo;
 import saedc.example.com.Model.Pojo.LastMonth;
 import saedc.example.com.Model.Pojo.LinechartPojo;
@@ -53,7 +54,7 @@ public class SpendingRepository {
         return appDatabase.spendingDao().getAvgMaxMinSending();
     }
 
-    public LiveData<AvgTotal> getAvgMaxTotalSending(int month) {
+    public LiveData<AvgTotalSpendAndIncome> getAvgMaxTotalSending(int month) {
         return appDatabase.spendingDao().getAvgMaxTotalSending(month);
     }
     public LiveData<MostAndLeast> getMostSending(int month) {

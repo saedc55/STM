@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import saedc.example.com.Model.Pojo.AvgMaxMin;
 import saedc.example.com.Model.Pojo.AvgTotal;
+import saedc.example.com.Model.Pojo.AvgTotalSpendAndIncome;
 import saedc.example.com.Model.Pojo.LastMonth;
 import saedc.example.com.Model.Pojo.MaxSaving;
 import saedc.example.com.Model.Pojo.MonthInYear;
@@ -44,7 +45,7 @@ public class SummaryViewModel extends AndroidViewModel {
         return spendingRepository.getLeastSending(month);
     }
 
-    public LiveData<AvgTotal> getAvgMaxTotalSending(int month) {
+    public LiveData<AvgTotalSpendAndIncome> getAvgMaxTotalSending(int month) {
         return spendingRepository.getAvgMaxTotalSending(month);
     }
 

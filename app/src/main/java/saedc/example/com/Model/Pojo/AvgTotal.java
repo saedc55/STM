@@ -3,6 +3,7 @@ package saedc.example.com.Model.Pojo;
 public class AvgTotal {
 
     Double average;
+
     Double total;
 
     public Double getAverage() {
