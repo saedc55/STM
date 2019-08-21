@@ -1,5 +1,8 @@
 package saedc.example.com.Model.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -12,7 +15,7 @@ import saedc.example.com.Model.Database.Converters;
 
 
 @Entity(tableName = "saving")
-public class Saving implements Serializable {
+public class Saving implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -70,5 +73,15 @@ public class Saving implements Serializable {
 
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

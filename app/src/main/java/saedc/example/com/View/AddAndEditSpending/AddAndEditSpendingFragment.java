@@ -1,7 +1,6 @@
 package saedc.example.com.View.AddAndEditSpending;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,11 +8,9 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -39,11 +35,10 @@ import saedc.example.com.Model.Entity.RawSpending;
 import saedc.example.com.Model.Entity.SpendingGroup;
 import saedc.example.com.R;
 import saedc.example.com.View.MainActivity;
-import saedc.example.com.View.OCR_Scan_Receipt.OcrCaptureActivity;
 
 
 public class AddAndEditSpendingFragment extends Fragment implements View.OnFocusChangeListener {
-    private static final int RC_OCR_CAPTURE = 3;
+
 
 
     @BindView(R.id.save_button)
@@ -58,8 +53,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     @BindView(R.id.title_textView)
     TextView titleTextView;
 
-    @BindView(R.id.camera_button)
-    ImageButton cameraButton;
+
 
     @BindView(R.id.delete_button)
     ImageButton deleteButton;
@@ -78,13 +72,13 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
     @BindView(R.id.textInputLayout3)
     TextInputLayout textInputLayout3;
-    boolean check;
+    private boolean check;
     @BindView(R.id.container)
     NestedScrollView container;
-    AlertDialog.Builder categoryDialog;
+    private AlertDialog.Builder categoryDialog;
     @BindView(R.id.CategoryButton)
     Button CategoryButton;
-    int groupId;
+    private int groupId;
 
     public static AddAndEditSpendingFragment newInstance() {
         return new AddAndEditSpendingFragment();
@@ -93,7 +87,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
     public static AddAndEditSpendingFragment newInstance(RawSpending spending) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("spending", spending);
+        bundle.putParcelable("spending", spending);
         AddAndEditSpendingFragment fragment = new AddAndEditSpendingFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -101,7 +95,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
     public static AddAndEditSpendingFragment newInstance(Boolean isSpend) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("isSpend", isSpend);
+        bundle.putBoolean("isSpend", isSpend);
         AddAndEditSpendingFragment fragment = new AddAndEditSpendingFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -125,7 +119,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
         } else {
 
-            Boolean check = (bundle.getSerializable("isSpend") != null) ? true : false;
+            Boolean check = bundle.getBoolean("isSpend");
 
 
             if (check) {
@@ -140,7 +134,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
             } else {
 
-                spending = (RawSpending) bundle.getSerializable("spending");
+                spending = bundle.getParcelable("spending");
                 deleteButton.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(), "oldspind", Toast.LENGTH_SHORT).show();
 
@@ -158,7 +152,6 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
     public void inComeUi() {
         CategoryButton.setVisibility(View.GONE);
-        cameraButton.setVisibility(View.GONE);
         textInputLayout3.setVisibility(View.VISIBLE);
     }
 
@@ -175,19 +168,27 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         viewModel.spendingGroups.observe(this, spendingGroups -> {
             spendingGroupList = (ArrayList<SpendingGroup>) spendingGroups;
             if (spending.getId() != 0) {
-                setTakenSpendingDataToFormElements();
+                setTakenSpendingDataToFormElements(spending.getGroupId(),spendingGroupList);
             }
         });
     }
 
-    public void setTakenSpendingDataToFormElements() {
+    public void setTakenSpendingDataToFormElements(int id,ArrayList<SpendingGroup> spendingGroupList) {
+
+        ArrayList<String> stringGroup = new ArrayList<>();
+        stringGroup.add("/////");
+        for (SpendingGroup s : spendingGroupList) {
+            stringGroup.add(s.getGroupName());
+        }
 
         titleTextView.setText(R.string.edit_a_spending);
         quantityEditText.setText(String.valueOf(spending.getPrice()));
         descriptionEditText.setText(spending.getDescription());
         source.setText(spending.getSource());
-
-
+        CategoryButton.setBackgroundResource(R.drawable.button_bordered_save);
+        CategoryButton.setTextColor(getResources().getColor(R.color.mdtp_white));
+        CategoryButton.setText(stringGroup.get(id));
+        groupId=id;
     }
 
 
@@ -203,7 +204,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         } else {
             date = spending.getDate();
         }
-        if (spending.getSpend() == true) {
+        if (spending.getSpend()) {
 
             if (groupId == 0) {
                 Toasty.warning(this.getContext(), "Please Select Group", Toast.LENGTH_SHORT, true).show();
@@ -275,11 +276,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
 
     }
 
-    @OnClick(R.id.camera_button)
-    public void openOcrCaptureActivity() {
-        Intent intent = new Intent(getActivity(), OcrCaptureActivity.class);
-        startActivityForResult(intent, RC_OCR_CAPTURE);
-    }
+
 
     @OnClick(R.id.delete_button)
     public void deleteSpending() {
@@ -287,34 +284,11 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         getActivity().onBackPressed();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RC_OCR_CAPTURE) {
-            if (resultCode == CommonStatusCodes.SUCCESS) {
-                if (data != null) {
-                    String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
-                    text = trimQuantity(text);
-                    quantityEditText.setText(text);
-                }
-            } else {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
-    public String trimQuantity(String text) {
-        int lastIndexOfLine = text.lastIndexOf("\n");
-        if (lastIndexOfLine != -1) {
-            text = text.substring(text.lastIndexOf("\n"));
-        }
-        text = text.replace(" ", "");
-        text = text.replace(",", ".");
-        text = text.replaceAll("[^\\d.]", "");
 
-        return text;
-    }
 
-    public void addSpending(RawSpending s) {
+
+    private void addSpending(RawSpending s) {
         viewModel.addSpending(s);
     }
 
@@ -322,7 +296,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         viewModel.deleteSpending(id);
     }
 
-    public void fillSpending(int groupId, double quantity, String description, Date date, String source) {
+    private void fillSpending(int groupId, double quantity, String description, Date date, String source) {
         spending.setGroupId(groupId);
         spending.setPrice(quantity);
         spending.setDescription(description);
@@ -330,24 +304,12 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         spending.setSource(source);
     }
 
-    public void fillIncome(double quantity, String description, Date date, String source) {
+    private void fillIncome(double quantity, String description, Date date, String source) {
         spending.setPrice(quantity);
         spending.setDescription(description);
         spending.setDate(date);
         spending.setSource(source);
     }
-
-//    public void fillSpinner(Spinner groupSpinner, List<SpendingGroup> spendingGroups) {
-//
-//        ArrayList<String> stringGroups1 = new ArrayList<>();
-//        stringGroups1.add("الرجاء إختيار النوع");
-//        for (SpendingGroup s : spendingGroups) {
-//            stringGroups1.add(s.getGroupName());
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, stringGroups1);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        groupSpinner.setAdapter(adapter);
-//    }
 
 
     @Override
@@ -358,23 +320,23 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     }
 
 
-    public void hideKeyboard(View v) {
+    private void hideKeyboard(View v) {
         ((MainActivity) getActivity()).hideKeyboard(v);
     }
 
 
     @OnClick(R.id.CategoryButton)
-    public void onViewClicked() {
+    void onViewClicked() {
         customDialog(spendingGroupList);
 
     }
 
 
-    void customDialog(List<SpendingGroup> spendingGroups) {
+    private void customDialog(List<SpendingGroup> spendingGroups) {
         categoryDialog = new AlertDialog.Builder(getActivity());
 
 
-        ArrayList<String> stringGroup = new ArrayList<String>();
+        ArrayList<String> stringGroup = new ArrayList<>();
         stringGroup.add("الرجاء إختيار النوع");
         for (SpendingGroup s : spendingGroups) {
             stringGroup.add(s.getGroupName());

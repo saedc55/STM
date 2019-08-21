@@ -1,5 +1,8 @@
 package saedc.example.com.Model.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -13,7 +16,7 @@ import saedc.example.com.Model.Database.Converters;
 
 
 @Entity(tableName = "spending")
-public class RawSpending implements Serializable {
+public class RawSpending implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -89,5 +92,15 @@ public class RawSpending implements Serializable {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

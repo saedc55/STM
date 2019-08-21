@@ -112,21 +112,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/camera_button"
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/button_bordered"
-                    android:contentDescription="@string/save"
-                    android:textColor="@color/colorAccent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-                    app:srcCompat="@drawable/icon_camera" />
-
-                <ImageButton
                     android:id="@+id/delete_button"
                     android:layout_width="70dp"
                     android:layout_height="40dp"
@@ -140,6 +125,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
                     app:srcCompat="@drawable/icon_delete" />
 

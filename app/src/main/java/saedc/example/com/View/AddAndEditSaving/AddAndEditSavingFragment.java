@@ -93,7 +93,7 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
 
     public static AddAndEditSavingFragment newInstance(Saving saving) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("saving", saving);
+        bundle.putParcelable("saving", saving);
         AddAndEditSavingFragment fragment = new AddAndEditSavingFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -114,7 +114,7 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
         if (bundle == null || bundle.isEmpty()) {
             saving = new Saving();
         } else {
-            saving = (Saving) bundle.getSerializable("saving");
+            saving = bundle.getParcelable("saving");
             deleteButton.setVisibility(View.VISIBLE);
         }
 
@@ -153,7 +153,7 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
                         progress = 0;
                     }
                     int incress = progress + saving.getItem_saveing().intValue();
-                    amount.setText(String.valueOf("الزيادة " + progress));
+                    amount.setText("الزيادة " + progress);
                     saving_price_amountEditText.setText(String.valueOf(incress));
 
 
@@ -182,32 +182,27 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        // do your actual work here
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+                        getActivity().runOnUiThread(() -> {
 
 
-                                if (!(s.equals("0") && s.length() == 0 && s.toString().isEmpty())) {
+                            if (!(s.equals("0") && s.length() == 0 && s.toString().isEmpty())) {
 
-                                    try {
-                                        salary = viewModel.getSalary();
-                                        save = Double.valueOf(s.toString());
-                                    } catch (NumberFormatException e) {
-                                        e.printStackTrace();
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-                                    }
-
-
+                                try {
+                                    salary = viewModel.getSalary();
+                                    save = Double.valueOf(s.toString());
+                                } catch (NumberFormatException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
                                 }
 
+
                             }
+
                         });
 
                         try {
@@ -215,21 +210,18 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (!s.toString().isEmpty()) {
-                                    try {
-                                        Suggester(salary);
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
+                        getActivity().runOnUiThread(() -> {
+                            if (!s.toString().isEmpty()) {
+                                try {
+                                    Suggester(salary);
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
-
-
                             }
+
+
                         });
 
 
