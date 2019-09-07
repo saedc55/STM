@@ -3,7 +3,6 @@ package saedc.example.com.View;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -13,6 +12,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -25,17 +35,6 @@ import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     FloatingActionButton spendingButton;
     String nextFragmentName = "";
     SharedPreferences.Editor editor;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         viewModel = ViewModelProviders.of(this).get(SpendingListViewModel.class);
 
 
-
         Boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
         if (IsColoreEnable) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -118,8 +120,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentManager = getSupportFragmentManager();
 
 
-
-
         spendingButton.hide();
         savingButton.hide();
         //Add this fragment just at start and dont add to backstack
@@ -128,10 +128,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             spendingButton.show();
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -284,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 startActivity(intent);
                 return true;
             case R.id.action_chart:
-                intent = new Intent(this, chartlist.class);
+                Intent intent = new Intent(this, MainSummaryActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -320,13 +322,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public void showFragment(Fragment nextFragment) {
         nextFragmentName = nextFragment.getClass().getName();
-        savingButton.hide();
-        spendingButton.hide();
+
 
         if (isLastFragmentInBackstack(nextFragment)) {
             return;
         }
-
+        savingButton.hide();
+        spendingButton.hide();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(R.id.fragment_container1, nextFragment)
@@ -365,27 +367,36 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
+
+
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
 
         if (id == R.id.currncy) {
-            Intent intent = new Intent(this, Taxcalculator.class);
+
+            Intent intent = new Intent(MainActivity.this, Taxcalculator.class);
             startActivity(intent);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.about) {
-            Intent intent = new Intent(this, AboutActivity.class);
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.chartactivaty) {
-            Intent intent = new Intent(this, chartlist.class);
+            Intent intent = new Intent(MainActivity.this, chartlist.class);
             startActivity(intent);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.summray) {
-            Intent intent = new Intent(this, MainSummaryActivity.class);
+            Intent intent = new Intent(MainActivity.this, MainSummaryActivity.class);
             startActivity(intent);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.salaryProfile) {
-            Intent intent = new Intent(this, Profile.class);
+            Intent intent = new Intent(MainActivity.this, Profile.class);
             startActivity(intent);
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
 
 
@@ -428,19 +439,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @OnClick(R.id.spending_button)
     public void onSpendingButtonClicked() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(R.array.dialog_choicelist, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
+        builder.setItems(R.array.dialog_choicelist, (dialog, which) -> {
+            switch (which) {
 
-                    case 0:
-                        showFragment(AddAndEditSpendingFragment.newInstance());
-                        spendingButton.hide();
-                        return;
-                    case 1:
-                        showFragment(AddAndEditSpendingFragment.newInstance(false));
-                        spendingButton.hide();
-                        return;
-                }
+                case 0:
+                    showFragment(AddAndEditSpendingFragment.newInstance(true));
+                    spendingButton.hide();
+                    return;
+                case 1:
+                    showFragment(AddAndEditSpendingFragment.newInstance(false));
+                    spendingButton.hide();
+                    return;
             }
         });
         builder.show();

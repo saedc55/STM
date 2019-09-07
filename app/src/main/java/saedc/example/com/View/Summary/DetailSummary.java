@@ -70,7 +70,7 @@ public class DetailSummary extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(SummaryViewModel.class);
 
         month = getIntent().getIntExtra(MainSummaryActivity.MONTH, 1);
-setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        ValueAnimator animation = ValueAnimator.ofFloat(1000f, 0f);
 //        animation.setDuration(700);
@@ -94,29 +94,29 @@ setSupportActionBar(toolbar);
 //     leastIncome;
 
         viewModel.getAvgMaxTotalIncome(month).observe(this, avgTotal -> {
-            avgIncome.setText(String.valueOf(avgTotal != null ? avgTotal.getAverage() : null));
+            avgIncome.setText(avgTotal != null ? String.format("%.2f", avgTotal.getAverage()) : null);
 
         });
 
 
         viewModel.getLeastIncome(month).observe(this, mostAndLeast -> {
 
-            leastIncome.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
+            leastIncome.setText(mostAndLeast != null ? String.format("%.2f", mostAndLeast.getPrice()) : null);
 
         });
 
 
         viewModel.getMostIncome(month).observe(this, mostAndLeast -> {
 
-            mostIncome.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
+            mostIncome.setText(mostAndLeast != null ? String.format("%.2f", mostAndLeast.getPrice()) : null);
 
 
         });
 
         viewModel.getAvgMaxTotalSending(month).observe(this::getLifecycle, avgTotal -> {
-            total.setText(String.valueOf(avgTotal != null ? avgTotal.getSpend() : null));
-            avg.setText(String.valueOf(avgTotal != null ? avgTotal.getAverage() : null));
-            totalIncome.setText(String.valueOf(avgTotal != null ? avgTotal.getIncome() : null));
+            total.setText(avgTotal != null ? String.format("%.2f", avgTotal.getSpend()) : null);
+            avg.setText(avgTotal != null ? String.format("%.2f", avgTotal.getAverage()) : null);
+            totalIncome.setText(avgTotal != null ? String.format("%.2f", avgTotal.getIncome()) : null);
 
 
             viewModel.getPichartByMonth(month).observe(this::getLifecycle, piechartPojos ->
@@ -126,13 +126,13 @@ setSupportActionBar(toolbar);
 
 
         viewModel.getMostSending(month).observe(this::getLifecycle, mostAndLeast -> {
-            most.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
+            most.setText(mostAndLeast != null ? String.format("%.2f", mostAndLeast.getPrice()) : null);
             mostcategory.setText(mostAndLeast != null ? mostAndLeast.getGroup_name() : null);
         });
 
 
         viewModel.getLeastSending(month).observe(this::getLifecycle, mostAndLeast -> {
-            least.setText(String.valueOf(mostAndLeast != null ? mostAndLeast.getPrice() : null));
+            least.setText(mostAndLeast != null ? String.format("%.2f", mostAndLeast.getPrice()) : null);
             leastcategory.setText(mostAndLeast != null ? mostAndLeast.getGroup_name() : null);
         });
 

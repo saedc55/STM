@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -41,6 +42,8 @@ public class RawSpending implements Parcelable {
 
     @ColumnInfo(name = "IncomeSource")
     private String source;
+
+
 
     public int getId() {
         return id;
@@ -93,6 +96,7 @@ public class RawSpending implements Parcelable {
     public void setSource(String source) {
         this.source = source;
     }
+
 
     @Override
     public int describeContents() {

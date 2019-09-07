@@ -171,66 +171,69 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
             });
         }
 
-
         saving_priceEditText.addTextChangedListener(new TextWatcher() {
-            boolean isCompleateType;
+
 
             @Override
             public void afterTextChanged(Editable s) {
 
-                timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
+
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
 
 
-                        getActivity().runOnUiThread(() -> {
+                            getActivity().runOnUiThread(() -> {
 
 
-                            if (!(s.equals("0") && s.length() == 0 && s.toString().isEmpty())) {
+                                if (!s.toString().isEmpty()) {
 
-                                try {
-                                    salary = viewModel.getSalary();
-                                    save = Double.valueOf(s.toString());
-                                } catch (NumberFormatException e) {
-                                    e.printStackTrace();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                } catch (ExecutionException e) {
-                                    e.printStackTrace();
+                                    try {
+                                        salary = viewModel.getSalary();
+                                        save = Double.valueOf(s.toString());
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+
+                            });
+
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            getActivity().runOnUiThread(() -> {
+                                if (!s.toString().isEmpty()) {
+                                    try {
+                                        Suggester(salary);
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
 
 
-                            }
+                            });
 
-                        });
 
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            // hide keyboard as well?
+                            // InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            // in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         }
-                        getActivity().runOnUiThread(() -> {
-                            if (!s.toString().isEmpty()) {
-                                try {
-                                    Suggester(salary);
-                                } catch (ExecutionException e) {
-                                    e.printStackTrace();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                    }, 600);
+                }
 
 
-                        });
 
-
-                        // hide keyboard as well?
-                        // InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        // in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    }
-                }, 600);
-            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -242,22 +245,6 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
                     timer.cancel();
                 }
 
-//                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//                int switchPr = 0;
-//
-//                switchPr = Integer.parseInt(sharedPref.getString("Settings_salary", "0"));
-//
-//                if (!(s.equals("0") && s.length() == 0 && s.toString().isEmpty())) {
-//
-//                    try {
-//                        save = Double.valueOf(s.toString());
-//                    } catch (NumberFormatException e) {
-//                        e.printStackTrace();
-//                    }
-//                    salary = switchPr;
-//                    Suggester(salary);
-//
-//                }
 
             }
 

@@ -40,7 +40,6 @@ import saedc.example.com.View.MainActivity;
 public class AddAndEditSpendingFragment extends Fragment implements View.OnFocusChangeListener {
 
 
-
     @BindView(R.id.save_button)
     ImageButton saveButton;
 
@@ -54,7 +53,6 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     TextView titleTextView;
 
 
-
     @BindView(R.id.delete_button)
     ImageButton deleteButton;
 
@@ -65,7 +63,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     ArrayList<SpendingGroup> spendingGroupList;
 
     SharedPreferences SettingDatabase;
-    Boolean isSpend;
+
 
     @BindView(R.id.source)
     EditText source;
@@ -79,6 +77,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     @BindView(R.id.CategoryButton)
     Button CategoryButton;
     private int groupId;
+    private boolean isEditMode;
 
     public static AddAndEditSpendingFragment newInstance() {
         return new AddAndEditSpendingFragment();
@@ -93,14 +92,23 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         return fragment;
     }
 
-    public static AddAndEditSpendingFragment newInstance(Boolean isSpend) {
+    public static AddAndEditSpendingFragment newInstance(RawSpending spending, boolean isEditMode, boolean isSpend) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isSpend", isSpend);
+        bundle.putParcelable("spending", spending);
+        bundle.putBoolean("isEditMode", isEditMode);
+        AddAndEditSpendingFragment fragment = new AddAndEditSpendingFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static AddAndEditSpendingFragment newInstance(boolean isSpend) {
         Bundle bundle = new Bundle();
         bundle.putBoolean("isSpend", isSpend);
         AddAndEditSpendingFragment fragment = new AddAndEditSpendingFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
-
 
     @Nullable
     @Override
@@ -111,37 +119,38 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         descriptionEditText.setOnFocusChangeListener(this);
         Bundle bundle = this.getArguments();
 
-        if (bundle == null || bundle.isEmpty()) {
 
-            Toast.makeText(getActivity(), "newspind", Toast.LENGTH_SHORT).show();
-            spending = new RawSpending();
-            spending.setSpend(true);
+        boolean isSpend = bundle.getBoolean("isSpend");
+        isEditMode = bundle.getBoolean("isEditMode");
+
+        if (isSpend) {
+
+            //create or edit spend
+            if (isEditMode) {
+                spending = bundle.getParcelable("spending");
+                deleteButton.setVisibility(View.VISIBLE);
+                titleTextView.setText("تعديل صرف");
+            } else {
+                spending = new RawSpending();
+                spending.setSpend(true);
+                titleTextView.setText("إنشاء صرف جديد");
+            }
+
 
         } else {
 
-            Boolean check = bundle.getBoolean("isSpend");
-
-
-            if (check) {
-
-
+            //create or edit income
+            if (isEditMode) {
+                spending = bundle.getParcelable("spending");
+                inComeUi();
+                titleTextView.setText("تعديل ايراد");
+            } else {
                 spending = new RawSpending();
                 spending.setSpend(false);
                 spending.setGroupId(1);
-                Toast.makeText(getActivity(), "newincome", Toast.LENGTH_SHORT).show();
                 inComeUi();
+                titleTextView.setText("إنشاء ايراد جديد");
 
-
-            } else {
-
-                spending = bundle.getParcelable("spending");
-                deleteButton.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "oldspind", Toast.LENGTH_SHORT).show();
-
-                if (!spending.getSpend()) {
-                    Toast.makeText(getActivity(), "oldincome", Toast.LENGTH_SHORT).show();
-                    inComeUi();
-                }
             }
 
         }
@@ -160,7 +169,9 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(AddAndEditSpendingViewModel.class);
         SettingDatabase = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        subscribeSpendingGroups();
+
+            subscribeSpendingGroups();
+
 
     }
 
@@ -168,12 +179,12 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
         viewModel.spendingGroups.observe(this, spendingGroups -> {
             spendingGroupList = (ArrayList<SpendingGroup>) spendingGroups;
             if (spending.getId() != 0) {
-                setTakenSpendingDataToFormElements(spending.getGroupId(),spendingGroupList);
+                setTakenSpendingDataToFormElements(spending.getGroupId(), spendingGroupList);
             }
         });
     }
 
-    public void setTakenSpendingDataToFormElements(int id,ArrayList<SpendingGroup> spendingGroupList) {
+    public void setTakenSpendingDataToFormElements(int id, ArrayList<SpendingGroup> spendingGroupList) {
 
         ArrayList<String> stringGroup = new ArrayList<>();
         stringGroup.add("/////");
@@ -181,14 +192,13 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
             stringGroup.add(s.getGroupName());
         }
 
-        titleTextView.setText(R.string.edit_a_spending);
         quantityEditText.setText(String.valueOf(spending.getPrice()));
         descriptionEditText.setText(spending.getDescription());
         source.setText(spending.getSource());
         CategoryButton.setBackgroundResource(R.drawable.button_bordered_save);
         CategoryButton.setTextColor(getResources().getColor(R.color.mdtp_white));
         CategoryButton.setText(stringGroup.get(id));
-        groupId=id;
+        groupId = id;
     }
 
 
@@ -277,15 +287,11 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     }
 
 
-
     @OnClick(R.id.delete_button)
     public void deleteSpending() {
         deleteSpending(spending.id);
         getActivity().onBackPressed();
     }
-
-
-
 
 
     private void addSpending(RawSpending s) {

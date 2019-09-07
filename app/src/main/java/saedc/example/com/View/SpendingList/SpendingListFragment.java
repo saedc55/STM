@@ -81,7 +81,6 @@ public class SpendingListFragment extends Fragment implements RecyclerVewItemCli
     private void subscribeSpendings() {
 
 
-
         viewModel.getTotalSpendingQuantity().observe(this, aDouble -> adapter.setTotalPrice(aDouble));
 
         viewModel.getSpendings().observe(this, spendings -> {
@@ -105,7 +104,17 @@ public class SpendingListFragment extends Fragment implements RecyclerVewItemCli
 
     @Override
     public void onItemClick(RawSpending clickedSpending) {
-        ((MainActivity) getActivity()).showFragment(AddAndEditSpendingFragment.newInstance(clickedSpending));
+        if (clickedSpending.getSpend()) {
+            ((MainActivity) getActivity()).showFragment(AddAndEditSpendingFragment.newInstance(clickedSpending,
+                    true,
+                    true));
+        }else{
+            ((MainActivity) getActivity()).showFragment(AddAndEditSpendingFragment.newInstance(clickedSpending,
+                    true,
+                    false));
+        }
+
+
     }
 
     // delete item whene user click on the item for long time
