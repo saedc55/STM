@@ -15,6 +15,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class SummaryActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_summary);
         ButterKnife.bind(this);
 
-        viewModel = ViewModelProviders.of(this).get(SummaryViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SummaryViewModel.class);
 
         viewModel.getAvgMaxMinSending().observe(this, avgMaxMin -> {
             if (avgMaxMin.getAverage() != null && avgMaxMin.getMaximum() != null && avgMaxMin.getMinimum() != null) {

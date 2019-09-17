@@ -34,6 +34,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
@@ -125,7 +126,7 @@ public class AddAndEditSavingFragment extends Fragment implements View.OnFocusCh
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(AddAndEditSavingViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AddAndEditSavingViewModel.class);
         OnEditeMode();
 
     }

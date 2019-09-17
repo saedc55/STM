@@ -1,5 +1,6 @@
 package saedc.example.com.View.Account;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class AccountListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
 
 
     }

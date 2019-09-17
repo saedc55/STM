@@ -1,5 +1,6 @@
 package saedc.example.com.View.ChartList;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class DetilaChart extends AppCompatActivity implements RecyclerVewItemCli
         setContentView(R.layout.activity_detila_chart);
 
         ButterKnife.bind(this);
-        viewModel = ViewModelProviders.of(this).get(chartViewModel.class);
+        viewModel = new ViewModelProvider(this).get(chartViewModel.class);
         Bundle bundle = getIntent().getExtras();
         String valueReceived1 = bundle.getString("Key1");
 //       String[] stringGroups = getResources().getStringArray(R.array.groups);

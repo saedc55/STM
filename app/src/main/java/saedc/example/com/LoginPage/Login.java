@@ -23,6 +23,7 @@ import com.github.stephenvinouze.materialnumberpickercore.MaterialNumberPicker;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import es.dmoral.toasty.Toasty;
 import saedc.example.com.Model.Entity.User;
@@ -45,7 +46,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         btn_Next = (ImageView) findViewById(R.id.button2);
         calendarButto = (ImageButton) findViewById(R.id.calendarButto);

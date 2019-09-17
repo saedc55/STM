@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +31,7 @@ import saedc.example.com.R;
 public class TotalSpendingPriceFragment extends Fragment {
     //    private static categoryRecyclerViewAdapter adapter;
     ArrayList<PiechartPojo> piechart = new ArrayList<>();
-    TotalSpendingPriceViewModel viewModel;
+    private TotalSpendingPriceViewModel viewModel;
     //    @BindView(R.id.recycl)
 //    RecyclerView recyclerView;
     @BindView(R.id.salaryid)
@@ -39,12 +40,12 @@ public class TotalSpendingPriceFragment extends Fragment {
     TextView SpindingTextView;
     @BindView(R.id.totalincome)
     TextView totalIncome;
-    Double salary = 0.0;
+    private Double salary = 0.0;
     // call SharedPreferences to take the salary from settings
-    SharedPreferences SettingDatabase;
-    CurrencyInstance numberFormat = new CurrencyInstance();
+    private SharedPreferences SettingDatabase;
+    private CurrencyInstance numberFormat = new CurrencyInstance();
     Double total = 0.0;
-    SharedPreferences SettingsDataBase;
+    private SharedPreferences SettingsDataBase;
 
 
     public static TotalSpendingPriceFragment newInstance() {
@@ -64,7 +65,7 @@ public class TotalSpendingPriceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(TotalSpendingPriceViewModel.class);
+        viewModel = new ViewModelProvider(this).get(TotalSpendingPriceViewModel.class);
         SettingsDataBase = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         calculationOfIncome();
@@ -82,30 +83,32 @@ public class TotalSpendingPriceFragment extends Fragment {
     }
 
 
-    public void calculationOfIncome() {
+    public void changeTextColor(int color){
+         SalaryTextView.setTextColor(color);
+         SpindingTextView.setTextColor(color);
+         totalIncome.setTextColor(color);
+
+    }
+
+
+    private void calculationOfIncome() {
 
         //salary
         try {
             salary = viewModel.getSalary();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (NumberFormatException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        viewModel.getTotalincome().observe(TotalSpendingPriceFragment.this::getLifecycle, aDouble -> {
+        viewModel.getTotalincome().observe(TotalSpendingPriceFragment.this, aDouble -> {
             Double income;
-            Double spend;
+            double spend;
             spend = aDouble.getSpend() != null ? aDouble.getSpend() : 0.0;
             income = aDouble.getIncome() != null ? aDouble.getIncome() : 0.0;
             if (aDouble.getSpend() != null) {
 //                    adapter.updateItems(aDouble.getSpend());
                 SpindingTextView.setText(numberFormat.getFmt().format(aDouble.getSpend()));
-                Boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
-                if (IsColoreEnable) {
-                    ChangeThemeBaseOnThisMonthTotal(aDouble.getSpend(), salary.intValue());
-                }
+                boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
+
 
             } else SpindingTextView.setText(R.string.empty);
 
@@ -121,57 +124,8 @@ public class TotalSpendingPriceFragment extends Fragment {
 
     }
 
-    public void ChangeThemeBaseOnThisMonthTotal(double ThisMonthTotal, int salary) {
-        double Percentag = ((ThisMonthTotal * 100.0) / salary);
-        Percentag = Math.round(Percentag * 100.0) / 100.0;
-
-        if (Percentag >= 20.0) {
-
-            if (Percentag <= 40.0) {
-                ChangrColore(R.color.colorPrimary, R.color.a);
-            } else if (Percentag <= 60.0) {
-                ChangrColore(R.color.a, R.color.c);
-            } else if (Percentag <= 80.0) {
-                ChangrColore(R.color.c, R.color.d);
-            } else if (Percentag <= 100.0) {
-                ChangrColore(R.color.d, R.color.e);
-            }
-        } else {
-            ChangrColore(R.color.colorPrimary, R.color.colorPrimary);
-
-        }
 
 
-    }
-
-    public void ChangrColore(int colorStart, int colorEnd) {
-
-
-        int colorFrom = getResources().getColor(colorStart);
-        int colorTo = getResources().getColor(colorEnd);
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-        colorAnimation.setDuration(1000); // milliseconds
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-
-                //                1            CDDC39
-                //                2            FFEB3B
-                //                3            FFC107
-                //                4            FF9800
-                //                5            FF5722
-
-                SpindingTextView.setTextColor((int) animator.getAnimatedValue());
-                SalaryTextView.setTextColor((int) animator.getAnimatedValue());
-                totalIncome.setTextColor((int) animator.getAnimatedValue());
-
-            }
-
-        });
-        colorAnimation.start();
-    }
 
 
 }

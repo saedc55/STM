@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
@@ -35,7 +36,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         viewModel.getUser().observe(this, user -> {
             this.user = user;

@@ -5,18 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/about"
+
+            android:title="حول" />
+        <item
             android:id="@+id/currncy"
 
             android:title="حساب الضريبة" />
-
-        <item
-            android:id="@+id/about"
-
-            android:title="@string/about" />
-        <item
-            android:id="@+id/chartactivaty"
-
-            android:title="رسم بياني" />
         <item
             android:id="@+id/summray"
 

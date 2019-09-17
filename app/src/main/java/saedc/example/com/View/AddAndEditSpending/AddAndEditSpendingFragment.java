@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -167,7 +168,7 @@ public class AddAndEditSpendingFragment extends Fragment implements View.OnFocus
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(AddAndEditSpendingViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AddAndEditSpendingViewModel.class);
         SettingDatabase = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
             subscribeSpendingGroups();

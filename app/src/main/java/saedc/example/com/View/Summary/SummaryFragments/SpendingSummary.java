@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -70,7 +71,7 @@ public class SpendingSummary extends Fragment implements SummaryClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         intent = new Intent(getActivity(), DetailSummary.class);
-        viewModel = ViewModelProviders.of(this).get(SummaryViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SummaryViewModel.class);
 
 
         ArrayList<BarEntry> values1 = new ArrayList<>();

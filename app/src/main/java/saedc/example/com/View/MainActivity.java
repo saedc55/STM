@@ -22,6 +22,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -47,12 +48,12 @@ import saedc.example.com.SettingsActivity;
 import saedc.example.com.TaxCalculator.Taxcalculator;
 import saedc.example.com.View.AddAndEditSaving.AddAndEditSavingFragment;
 import saedc.example.com.View.AddAndEditSpending.AddAndEditSpendingFragment;
-import saedc.example.com.View.ChartList.chartlist;
 import saedc.example.com.View.Profile.Profile;
 import saedc.example.com.View.SavingList.SavingListFragment;
 import saedc.example.com.View.SpendingList.SpendingListFragment;
 import saedc.example.com.View.SpendingList.SpendingListViewModel;
 import saedc.example.com.View.Summary.MainSummaryActivity;
+import saedc.example.com.View.TotalSpendingPrice.TotalSpendingPriceFragment;
 
 import static android.view.View.VISIBLE;
 
@@ -104,10 +105,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
 
-        viewModel = ViewModelProviders.of(this).get(SpendingListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SpendingListViewModel.class);
 
 
-        Boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
+        boolean IsColoreEnable = SettingsDataBase.getBoolean("color_preference", false);
         if (IsColoreEnable) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 SubscribeThemeChanger();
@@ -182,9 +183,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                     editor.putString("reminder_date", dateFormat.format(Calendar.getInstance().getTime()));
                                     editor.apply();
 
-                                } catch (ExecutionException e) {
-                                    e.printStackTrace();
-                                } catch (InterruptedException e) {
+                                } catch (ExecutionException | InterruptedException e) {
                                     e.printStackTrace();
                                 }
 
@@ -207,13 +206,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void SubscribeThemeChanger() {
-        viewModel.getTotalSpendingQuantity().observe(this::getLifecycle, aDouble -> {
+        viewModel.getTotalSpendingQuantity().observe(this, aDouble -> {
             if (aDouble != null) {
                 try {
                     ChangeThemeBaseOnThisMonthTotal(aDouble, viewModel.getUserSalary().intValue());
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -265,6 +262,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getWindow().setStatusBarColor((int) animator.getAnimatedValue());
             savingButton.setColorFilter((int) animator.getAnimatedValue());
             spendingButton.setColorFilter((int) animator.getAnimatedValue());
+            TotalSpendingPriceFragment fragment = (TotalSpendingPriceFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_quantity);
+            if (fragment != null) {
+                fragment.changeTextColor((int) animator.getAnimatedValue());
+            }
 
         });
         colorAnimation.start();
@@ -348,9 +349,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         int count = getFragmentBackStackCount();
         if (count != 0) {
             currentFragmentName = getLastFragmentNameInBackStack();
-            if (currentFragmentName.equals(nextFragmentName)) {
-                return true;
-            }
+            return currentFragmentName.equals(nextFragmentName);
         }
         return false;
     }
@@ -383,10 +382,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.about) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            startActivity(intent);
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.chartactivaty) {
-            Intent intent = new Intent(MainActivity.this, chartlist.class);
             startActivity(intent);
             drawerLayout.closeDrawer(GravityCompat.START);
         } else if (id == R.id.summray) {

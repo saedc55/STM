@@ -55,10 +55,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".View.MainActivity" />
-        <activity android:name=".View.OCR_Scan_Receipt.OcrCaptureActivity" />
-        <activity
-            android:name=".View.ChartList.chartlist"
-            android:label="@string/title_activity_chartlist" />
         <activity
             android:name=".Alarm.AlarmActivity"
             android:label="@string/title_activity_chartlist"

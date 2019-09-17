@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -67,7 +68,7 @@ public class DetailSummary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.summary);
         ButterKnife.bind(this);
-        viewModel = ViewModelProviders.of(this).get(SummaryViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SummaryViewModel.class);
 
         month = getIntent().getIntExtra(MainSummaryActivity.MONTH, 1);
         setSupportActionBar(toolbar);
