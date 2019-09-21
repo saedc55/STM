@@ -48,11 +48,11 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        btn_Next = (ImageView) findViewById(R.id.button2);
-        calendarButto = (ImageButton) findViewById(R.id.calendarButto);
-        uName = (EditText) findViewById(R.id.Name);
-        uNumber = (EditText) findViewById(R.id.Number);
-        info = (TextView) findViewById(R.id.info);
+        btn_Next = findViewById(R.id.button2);
+        calendarButto = findViewById(R.id.calendarButto);
+        uName = findViewById(R.id.Name);
+        uNumber = findViewById(R.id.Number);
+        info = findViewById(R.id.info);
 
 
 

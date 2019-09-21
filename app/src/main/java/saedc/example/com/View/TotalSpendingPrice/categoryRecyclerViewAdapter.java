@@ -35,12 +35,13 @@ public class categoryRecyclerViewAdapter extends RecyclerView.Adapter<categoryRe
     private ArrayList<PiechartPojo> dataSet;
     private LayoutInflater layoutInflater;
     private int lastPosition = -1;
-
+    private CurrencyInstance numberFormat;
     public categoryRecyclerViewAdapter(Context context, ArrayList<PiechartPojo> dataSet, Double total) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.dataSet = dataSet;
         this.total = total;
+        numberFormat = CurrencyInstance.newInstance();
 
     }
 
@@ -58,7 +59,7 @@ public class categoryRecyclerViewAdapter extends RecyclerView.Adapter<categoryRe
         Double price = s.getCategoryTotal();
         String group = s.getCategoryName();
 
-        CurrencyInstance numberFormat = new CurrencyInstance();
+
 
         viewHolder.totaltext().setText(numberFormat.getFmt().format(price));
 

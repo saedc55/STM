@@ -43,7 +43,7 @@ public class TotalSpendingPriceFragment extends Fragment {
     private Double salary = 0.0;
     // call SharedPreferences to take the salary from settings
     private SharedPreferences SettingDatabase;
-    private CurrencyInstance numberFormat = new CurrencyInstance();
+    private CurrencyInstance numberFormat ;
     Double total = 0.0;
     private SharedPreferences SettingsDataBase;
 
@@ -57,6 +57,7 @@ public class TotalSpendingPriceFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        numberFormat = CurrencyInstance.newInstance();
         SettingDatabase = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
     }

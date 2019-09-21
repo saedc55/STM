@@ -40,11 +40,12 @@ public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRe
     private LayoutInflater layoutInflater;
     private int lastPosition = -1;
 
-    public SpendingRecyclerViewAdapter(Context context, ArrayList<Spending> spendings, RecyclerVewItemClickListener listener) {
+    SpendingRecyclerViewAdapter(Context context, ArrayList<Spending> spendings, RecyclerVewItemClickListener listener) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.spendings = spendings;
         this.recyclerVewItemClickListener = listener;
+
     }
 
     @Override
@@ -64,7 +65,7 @@ public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRe
             Date date = s.getRawSpending().getDate();
             String group = s.getGroupName();
             String data = String.valueOf(s.getRawSpending().getId());
-            CurrencyInstance numberFormat = new CurrencyInstance();
+
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
             // put an unique string id as value, can be any string which uniquely define the data
             binderHelper.bind(viewHolder.swipeLayout, data);
@@ -73,7 +74,7 @@ public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRe
             viewHolder.delete();
             viewHolder.edite();
 //        String quantityWithCurrency = context.getString(R.string.turkish_lira_symbol) + String.valueOf(quantity);
-            viewHolder.txtQuantity.setText(numberFormat.getFmt().format(quantity));
+            viewHolder.txtQuantity.setText(CurrencyInstance.newInstance().getFmt().format(quantity));
             viewHolder.txtDescription.setText(description);
             viewHolder.txtDate.setText(dateFormat.format(date));
 

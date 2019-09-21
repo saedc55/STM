@@ -1,22 +1,20 @@
 package saedc.example.com.View.AddAndEditSpending;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
-import android.os.AsyncTask;
-
-import saedc.example.com.CurrentDate;
-import saedc.example.com.Model.Entity.RawSpending;
-import saedc.example.com.Model.Entity.SpendingGroup;
-import saedc.example.com.Model.Repository.SpendingRepository;
-import saedc.example.com.StmApp;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
+
+import saedc.example.com.Model.Entity.RawSpending;
+import saedc.example.com.Model.Entity.SpendingGroup;
+import saedc.example.com.Model.Repository.SpendingRepository;
+import saedc.example.com.StmApp;
 
 
 public class AddAndEditSpendingViewModel extends AndroidViewModel {
@@ -25,7 +23,6 @@ public class AddAndEditSpendingViewModel extends AndroidViewModel {
     final public LiveData<Double> totalSpendingQuantity;
     @Inject
     public SpendingRepository spendingRepository;
-    CurrentDate dateMonth = new CurrentDate();
 
     public AddAndEditSpendingViewModel(Application application) {
         super(application);

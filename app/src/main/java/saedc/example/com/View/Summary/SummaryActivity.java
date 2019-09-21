@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import saedc.example.com.CurrencyInstance;
@@ -26,7 +27,7 @@ import saedc.example.com.R;
 import saedc.example.com.View.ChartList.MyValueFormatter;
 import saedc.example.com.View.ChartList.MyYAxisValueFormatter;
 
-public class SummaryActivity extends AppCompatActivity  {
+public class SummaryActivity extends AppCompatActivity {
 
     SummaryViewModel viewModel;
     @BindView(R.id.spend_max)
@@ -43,8 +44,7 @@ public class SummaryActivity extends AppCompatActivity  {
     TextView incomeMin;
     @BindView(R.id.LineChart)
     LineChart LineChart;
-    CurrencyInstance numberFormat = new CurrencyInstance();
-
+    CurrencyInstance numberFormat;
 
 
     @Override
@@ -52,7 +52,7 @@ public class SummaryActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
         ButterKnife.bind(this);
-
+        numberFormat = CurrencyInstance.newInstance();
         viewModel = new ViewModelProvider(this).get(SummaryViewModel.class);
 
         viewModel.getAvgMaxMinSending().observe(this, avgMaxMin -> {
@@ -86,7 +86,6 @@ public class SummaryActivity extends AppCompatActivity  {
 
             }
         });
-
 
 
     }

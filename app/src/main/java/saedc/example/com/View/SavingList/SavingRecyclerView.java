@@ -39,13 +39,14 @@ public class SavingRecyclerView extends RecyclerView.Adapter<SavingRecyclerView.
     Context context;
     private LayoutInflater layoutInflater;
     private int lastPosition = -1;
-
+    CurrencyInstance numberFormat;
     public SavingRecyclerView(Context context, ArrayList<Saving> spendings, Recyclerviewclick listener) {
 
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.savingslist = spendings;
         this.recyclerVewItemClickListener = listener;
+        numberFormat = CurrencyInstance.newInstance();
     }
 
     //    calculate days
@@ -78,7 +79,7 @@ public class SavingRecyclerView extends RecyclerView.Adapter<SavingRecyclerView.
         String namesaving = s.getSavingname();
         Double quantity1 = s.getItem_price();
         Double quantity2 = s.getItem_saveing();
-        CurrencyInstance numberFormat = new CurrencyInstance();
+
         Date date = s.getEnd_date();
 
         if (quantity2 <= quantity1) {

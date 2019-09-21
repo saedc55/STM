@@ -1,21 +1,33 @@
 package saedc.example.com;
 
-import java.text.DecimalFormat;
+import android.os.Bundle;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class CurrencyInstance {
-    NumberFormat numberFormat;
+public class  CurrencyInstance {
+    static NumberFormat numberFormat;
+    Locale locale;
+    private static CurrencyInstance instance;
+    static {
+        instance = new CurrencyInstance();
+    }
 
-    public CurrencyInstance() {
-        Locale locale = new Locale("ar", "SA");
+
+     public static CurrencyInstance newInstance() {
+
+
+         return instance;
+    }
+    private CurrencyInstance() {
+        locale = new Locale("ar", "SA");
         numberFormat = NumberFormat.getCurrencyInstance(locale);
         numberFormat.setMinimumFractionDigits(2);
 
     }
 
 
-    public NumberFormat getFmt() {
+    public static  NumberFormat getFmt() {
         return numberFormat;
     }
 

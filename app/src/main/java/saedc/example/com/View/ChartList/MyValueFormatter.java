@@ -14,7 +14,7 @@ public class MyValueFormatter implements IValueFormatter {
     CurrencyInstance currencyInstance;
 
     public MyValueFormatter() {
-        currencyInstance = new CurrencyInstance();
+        currencyInstance = CurrencyInstance.newInstance();
     }
 
     @Override

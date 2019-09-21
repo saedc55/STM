@@ -13,7 +13,7 @@ public class MyYAxisValueFormatter implements IAxisValueFormatter {
     CurrencyInstance currencyInstance;
 
     public MyYAxisValueFormatter() {
-        currencyInstance = new CurrencyInstance();
+        currencyInstance = CurrencyInstance.newInstance();
 
     }
 
